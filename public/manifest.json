@@ -1,0 +1,37 @@
+{
+  "name": "UTC",
+  "short_name": "UTC",
+  "description": "UTC App",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f8e22a",
+  "theme_color": "#f8e22a",
+  "orientation": "portrait",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/ic_launcher.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/ic_launcher.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/ic_launcher.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/ic_launcher.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+} 

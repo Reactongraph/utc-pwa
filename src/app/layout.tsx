@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import Boundary from "@/components/common/Boundary";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "@/context/ThemeContext";
-import { ReduxProvider } from "@/components/providers/ReduxProvider";
+import { ReduxProvider } from "@/providers/ReduxProvider";
+import { ToastProvider } from "@/providers/ToastProvider";
 import "./globals.css";
+import { Topbar } from "@/components";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,13 +27,13 @@ export const metadata: Metadata = {
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
-    title: "UTC"
+    title: "UTC",
   },
   formatDetection: {
     telephone: false,
   },
   viewport: {
-    width: 'device-width',
+    width: "device-width",
     initialScale: 1,
     maximumScale: 1,
   },
@@ -58,7 +60,14 @@ export default function RootLayout({
         <div className="app-container">
           <ReduxProvider>
             <ThemeProvider>
-              <Boundary>{children}</Boundary>
+              <ToastProvider>
+                <Boundary>
+                  <div className="min-h-[100vh] flex bg-[url('/images/main_menu_background.png')] bg-contain bg-center bg-no-repeat">
+                    <Topbar version="2.2" />
+                    {children}
+                  </div>
+                </Boundary>
+              </ToastProvider>
             </ThemeProvider>
           </ReduxProvider>
         </div>

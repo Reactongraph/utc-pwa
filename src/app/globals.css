@@ -33,7 +33,7 @@ body {
   margin: 0 auto;
   background-color: var(--background);
   min-height: 100vh;
-} 
+}
 
 .no-scrollbar::-webkit-scrollbar {
   display: none;
@@ -41,4 +41,8 @@ body {
 .no-scrollbar {
   -ms-overflow-style: none; /* Internet Explorer 10+ */
   scrollbar-width: none; /* Firefox */
+}
+
+.iframe-container img {
+  width: 100% !important;
 }

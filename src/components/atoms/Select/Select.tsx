@@ -12,6 +12,7 @@ interface SelectFieldProps {
   options: Option[];
   required?: boolean;
   labelClass?: string;
+  error?: string | undefined | boolean;
 }
 
 export default function Select({
@@ -23,52 +24,56 @@ export default function Select({
   options,
   required = false,
   labelClass = "text-right",
+  error,
 }: SelectFieldProps) {
   return (
-    <div className="flex items-center">
-      <label
-        htmlFor={name}
-        className={`w-1/3 pr-4 font-semibold text-black ${labelClass}`}
-      >
-        {label}
-      </label>
-      <div className="w-2/3 relative">
-        <select
-          id={name}
-          name={name}
-          value={value}
-          onChange={(e) => onChange(name, e.target.value)}
-          required={required}
-          className="w-full p-2 bg-gray-100 border border-gray-300 rounded-md appearance-none focus:outline-none focus:ring-2 focus:ring-yellow-500"
+    <>
+      <div className="flex items-center">
+        <label
+          htmlFor={name}
+          className={`w-1/3 pr-4 font-semibold text-black ${labelClass}`}
         >
-          {placeholder && (
-            <option value="" disabled>
-              {placeholder}
-            </option>
-          )}
-          {options.map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </select>
-        <div className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="lucide lucide-chevron-down"
+          {label}
+        </label>
+        <div className="w-2/3 relative">
+          <select
+            id={name}
+            name={name}
+            value={value}
+            onChange={(e) => onChange(name, e.target.value)}
+            required={required}
+            className="w-full p-2 bg-gray-100 border border-gray-300 rounded-md appearance-none focus:outline-none focus:ring-2 focus:ring-yellow-500"
           >
-            <path d="m6 9 6 6 6-6" />
-          </svg>
+            {placeholder && (
+              <option value="" disabled>
+                {placeholder}
+              </option>
+            )}
+            {options.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+          <div className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="lucide lucide-chevron-down"
+            >
+              <path d="m6 9 6 6 6-6" />
+            </svg>
+          </div>
+          {error && <p className="text-red-500 text-sm">{error}</p>}
         </div>
       </div>
-    </div>
+    </>
   );
 }

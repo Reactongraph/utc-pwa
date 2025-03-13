@@ -9,6 +9,7 @@ interface InputFieldProps {
   className?: string;
   inline?: boolean;
   rows?: number;
+  error?: string | undefined | boolean;
 }
 
 export default function Input({
@@ -22,6 +23,8 @@ export default function Input({
   className,
   inline = false,
   rows = 1,
+  error,
+  ...props
 }: InputFieldProps) {
   return (
     <div className={`flex ${inline ? "flex-row items-center" : "flex-col"}`}>
@@ -38,27 +41,31 @@ export default function Input({
             {label}
           </label>
         ))}
-      {rows === 1 ? (
-        <input
-          type={type}
-          name={name}
-          value={value}
-          onChange={(e) => onChange?.(name, e.target.value)}
-          required={required}
-          placeholder={placeholder}
-          className={`w-full p-2 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 ${className}`}
-        />
-      ) : (
-        <textarea
-          name={name}
-          value={value}
-          onChange={(e) => onChange?.(name, e.target.value)}
-          required={required}
-          placeholder={placeholder}
-          className={`w-full p-2 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 ${className}`}
-          rows={rows}
-        />
-      )}
+      <div>
+        {rows === 1 ? (
+          <input
+            type={type}
+            name={name}
+            value={value}
+            onChange={(e) => onChange?.(name, e.target.value)}
+            required={required}
+            placeholder={placeholder}
+            className={`w-full p-2 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 ${className}`}
+            {...props}
+          />
+        ) : (
+          <textarea
+            name={name}
+            value={value}
+            onChange={(e) => onChange?.(name, e.target.value)}
+            required={required}
+            placeholder={placeholder}
+            className={`w-full p-2 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 ${className}`}
+            rows={rows}
+          />
+        )}
+        {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
+      </div>
     </div>
   );
 }

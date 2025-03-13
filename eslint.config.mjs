@@ -14,9 +14,10 @@ const eslintConfig = [
   {
     rules: {
       "@next/next/no-img-element": "off",
-      "react/no-unescaped-entities": "off"
-    }
-  }
+      "react/no-unescaped-entities": "off",
+      "@typescript-eslint/no-non-null-asserted-optional-chain": "off",
+    },
+  },
 ];
 
 export default eslintConfig;

@@ -3,40 +3,33 @@ import { NextResponse } from "next/server";
 
 export default withAuth(
   function middleware(req) {
-    const token = req.nextauth.token;
-    console.log("token", token);
-    const isAuth = !!token;
-    const isAuthPage = req.nextUrl.pathname === "/login";
+    const session = req.nextauth.token;
+    const isAuth = !!session;
+    const authPages = ["/login", "/register"];
+    const isAuthPage = authPages.includes(req.nextUrl.pathname);
 
     if (req.nextUrl.pathname.includes("/images/")) {
       return null;
     }
     if (isAuthPage) {
       if (isAuth) {
-        // return NextResponse.redirect(new URL('/', req.url));
+        return NextResponse.redirect(new URL("/", req.url));
       }
       return null;
     }
 
-    // if (!isAuth) {
-    //   let from = req.nextUrl.pathname;
-    //   if (req.nextUrl.search) {
-    //     from += req.nextUrl.search;
-    //   }
+    if (!isAuth) {
+      let from = req.nextUrl.pathname;
+      if (req.nextUrl.search) {
+        from += req.nextUrl.search;
+      }
 
-    //   return NextResponse.redirect(
-    //     new URL(`/login?from=${encodeURIComponent(from)}`, req.url)
-    //   );
-    // }
+      return NextResponse.redirect(
+        new URL(`/login?from=${encodeURIComponent(from)}`, req.url)
+      );
+    }
 
-    const requestHeaders = new Headers(req.headers);
-    // requestHeaders.set("authorization", `Bearer ${token.accessToken}`);
-
-    return NextResponse.next({
-      request: {
-        headers: requestHeaders,
-      },
-    });
+    return NextResponse.next();
   },
   {
     callbacks: {

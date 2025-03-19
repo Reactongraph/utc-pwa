@@ -6,7 +6,7 @@ import { ReduxProvider } from "@/providers/ReduxProvider";
 import { ToastProvider } from "@/providers/ToastProvider";
 import "./globals.css";
 import { Topbar } from "@/components";
-
+import { SessionProvider } from "@/providers/SessionProvider";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -59,6 +59,8 @@ export default function RootLayout({
       >
         <div className="app-container">
           <ReduxProvider>
+            <SessionProvider>
+
             <ThemeProvider>
               <ToastProvider>
                 <Boundary>
@@ -69,6 +71,7 @@ export default function RootLayout({
                 </Boundary>
               </ToastProvider>
             </ThemeProvider>
+            </SessionProvider>
           </ReduxProvider>
         </div>
       </body>
